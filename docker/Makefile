@@ -16,6 +16,8 @@ clean:
 	docker rm eos_docker_tools
 
 distclean:
+	-docker stop `docker ps -a -q`
 	-docker rmi plainchant/eos/eos_docker_tools:v1
 	-docker rmi builder:v1
+	-docker rmi $(docker images | grep "none" | awk '{print $3}')
 
