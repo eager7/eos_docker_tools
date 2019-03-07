@@ -1,16 +1,21 @@
-.PHONY: all clean distclean
+.PHONY: all run clean distclean
 
 default: all
 
 all:
 	docker build -t plainchant/eos/eos_docker_tools:v1 ./
 
+builder:
+	docker build --target builder -t builder:v1 ./
+
 run:
-	docker run -d --name eos_docker_tools plainchant/eos/eos_docker_tools:v1
+	docker run --name eos_docker_tools plainchant/eos/eos_docker_tools:v1
 
 clean:
 	docker stop eos_docker_tools
 	docker rm eos_docker_tools
 
 distclean:
-	docker rmi eos_docker_tools
+	-docker rmi plainchant/eos/eos_docker_tools:v1
+	-docker rmi builder:v1
+
