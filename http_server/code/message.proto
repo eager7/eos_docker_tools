@@ -12,9 +12,3 @@ enum  ErrCode {
  	ERROR_DATA_NOT_EXIST		  = 7;
 
 }
-
-message Resp {
-    ErrCode ErrNo   = 1;
-    bytes  ErrMsg  = 2;
-    bytes   Payload = 3;
-}
