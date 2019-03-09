@@ -35,7 +35,7 @@ func md5Sum(file string) (string, error) {
 }
 
 func CompileCodeAndGetHash(dir string) (string, error) {
-	if ret, err := runCmd(fmt.Sprintf("make -C %s", dir)); err != nil {
+	if ret, err := runCmd(fmt.Sprintf("cd %s && cmake ./ && make ", dir)); err != nil {
 		log.Error("compile contract error:", string(ret))
 		return "", err
 	}
