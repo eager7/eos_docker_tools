@@ -19,5 +19,5 @@ func initRouter(router *gin.Engine) {
 	router.GET("/ping", handle.Ping)
 	router.GET("/version", handle.Version)
 
-	router.POST("/contracts", )
+	router.POST("/contracts", handle.ContractsHandle)
 }

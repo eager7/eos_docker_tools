@@ -11,6 +11,14 @@ func TestMd5(t *testing.T) {
 	}
 }
 
+func TestFindFiles(t *testing.T) {
+	if ret, err := searchResultFiles("/tmp/eosplainsong"); err != nil {
+		t.Fatal(err)
+	} else {
+		t.Log(ret)
+	}
+}
+
 func checkError(err error, t *testing.T) {
 	if err != nil {
 		if t != nil {

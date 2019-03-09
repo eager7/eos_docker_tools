@@ -21,12 +21,12 @@ func runCmd(shell string) ([]byte, error) {
 	return out, err
 }
 
-func md5Sum(data string) (string, error){
-	md5, err := runCmd(fmt.Sprintf("md5 -s %s", data)) //MD5 ("pct") = 973333fd6d3ab217522f3785d5d3e6ea
+func md5Sum(file string) (string, error) {
+	md5, err := runCmd(fmt.Sprintf("md5 %s", file)) //MD5 ("pct") = 973333fd6d3ab217522f3785d5d3e6ea
 	if err != nil {
 		return "", err
 	}
-	reg := regexp.MustCompile(`.*= (.*)`)//(.*)分组匹配多个
+	reg := regexp.MustCompile(`.*= (.*)`) //(.*)分组匹配多个
 	ret := reg.FindSubmatch(md5)
 	if len(ret) != 2 {
 		return "", errors.New("regexp search error")
@@ -34,6 +34,34 @@ func md5Sum(data string) (string, error){
 	return string(ret[1]), nil
 }
 
-func compileCode(code []byte) ([]byte, error) {
-	return nil, nil
+func CompileCodeAndGetHash(dir string) (string, error) {
+	if ret, err := runCmd(fmt.Sprintf("make -C %s", dir)); err != nil {
+		log.Error("compile contract error:", string(ret))
+		return "", err
+	}
+	file, err := searchResultFiles(dir)
+	if err != nil {
+		return "", err
+	}
+
+	return md5Sum(file)
+}
+
+func searchResultFiles(dir string) (string, error) {
+	if ret, err := runCmd(fmt.Sprintf("ls %s", dir)); err != nil {
+		log.Error("find files error:", string(ret))
+		return "", err
+	} else {
+		if reg, err := regexp.Compile(`[a-z]+\.wasm`); err != nil {
+			log.Error("construct regexp failed:", err)
+			return "", err
+		} else {
+			fileName := reg.FindString(string(ret))
+			if "" == fileName {
+				return "", errors.New("can't find compile result file")
+			}
+			log.Info([]byte(fileName))
+			return dir + "/" + fileName, nil
+		}
+	}
 }
