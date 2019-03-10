@@ -12,7 +12,7 @@ func InitializeGin() error {
 
 	initRouter(engine)
 
-	return engine.Run("localhost:13141")
+	return engine.Run("0.0.0.0:13141")
 }
 
 func initRouter(router *gin.Engine) {
