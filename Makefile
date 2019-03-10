@@ -9,7 +9,10 @@ BUILD_TIME=`date +%Y%m%d%H%M%S`
 LDFLAGS=-ldflags "-X main.Version=${GITTAG} -X main.Build_Time=${BUILD_TIME} -s -w"
 
 default:
-	go build ${LDFLAGS} -o ${TARGET} ${SRC}
+	GO111MODULE=off go build ${LDFLAGS} -o ${TARGET} ${SRC}
+
+mod:
+	GO111MODULE=on go build ${LDFLAGS} -o ${TARGET} ${SRC}
 
 clean:
 	-rm ${TARGET}
