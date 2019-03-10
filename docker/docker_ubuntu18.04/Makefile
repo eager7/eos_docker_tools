@@ -1,6 +1,6 @@
-.PHONY: all run clean distclean
+.PHONY: all run clean dist_clean
 
-repository:="plainchant/eos_docker_tools:vubuntu-18.04"
+repository:="plainchant/eos_docker_tools:ubuntu-18.04"
 
 default: all
 
@@ -17,7 +17,7 @@ clean:
 	docker stop eos_docker_tools
 	docker rm eos_docker_tools
 
-distclean:
+dist_clean:
 	-docker stop `docker ps -a -q`
 	-docker rmi ${repository}
 	-docker rmi builder:v1
