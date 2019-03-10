@@ -1,6 +1,6 @@
 .PHONY: all run clean dist_clean
 
-repository:="plainchant/eos_docker_tools:ubuntu-18.04"
+repository:="plainchant/eos_docker_tools:centos-7"
 
 default: all
 
