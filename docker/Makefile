@@ -9,7 +9,7 @@ builder:
 	docker build --target builder -t builder:v1 ./
 
 run:
-	docker run --name eos_docker_tools plainchant/eos/eos_docker_tools:v1
+	docker run -p 13141:13141 --name eos_docker_tools plainchant/eos/eos_docker_tools:v1
 
 clean:
 	docker stop eos_docker_tools
