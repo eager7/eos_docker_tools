@@ -15,5 +15,6 @@ if [ "$deb" = "" ]; then
 	echo "Either $1 is not a valid release, or there is not a published .deb package for the release."
 	exit 1
 fi
+echo "package:" $deb
 
 /usr/bin/wget $deb && /usr/bin/dpkg -i "$filename" && rm -f "$filename"
