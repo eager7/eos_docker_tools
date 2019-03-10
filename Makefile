@@ -14,5 +14,8 @@ default:
 mod:
 	GO111MODULE=on go build ${LDFLAGS} -o ${TARGET} ${SRC}
 
+depends:
+	GO111MODULE=on go mod download
+
 clean:
 	-rm ${TARGET}
