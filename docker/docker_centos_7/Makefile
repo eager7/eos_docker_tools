@@ -18,7 +18,7 @@ clean:
 	docker rm eos_docker_tools
 
 dist_clean:
-	-docker rmi $(docker images | grep "none" | awk '{print $3}')
+	-docker rmi $$(docker images | grep "none" | awk '{print $$3}')
 	-docker stop `docker ps -a -q`
 	-docker rmi ${repository}
 	-docker rmi builder:v1
