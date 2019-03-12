@@ -20,7 +20,7 @@ COPY --from=0 /go/src/github.com/eager7/eos_docker_tools/eos_docker_tools .
 
 # Install required packages
 RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y install openssl ca-certificates curl wget \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install openssl ca-certificates curl wget make \
     && rm -rf /var/lib/apt/lists/*
 
 # Install CDT from deb package
