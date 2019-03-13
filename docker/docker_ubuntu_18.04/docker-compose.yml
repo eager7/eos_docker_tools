@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  eos_docker:
+    image: plainchant/eos_docker_tools:ubuntu-18.04
+    build:
+      ./
+    container_name: eos_docker_tools
+    ports:
+      - 13141:13141
+    expose:
+      - 13141
